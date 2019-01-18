@@ -25,3 +25,8 @@ $ fw -r -t "ｂａｚ"
 ```
 baz
 ```
+
+## Installation
+```bash
+pip install --upgrade "git+https://github.com/t-mart/fw"
+```
