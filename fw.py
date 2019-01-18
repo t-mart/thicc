@@ -132,7 +132,7 @@ parser.add_argument(
     help="The text to convert",
 )
 
-if __name__ == '__main__':
+def main():
     args = parser.parse_args()
     conversion_map = wide if args.reverse else narrow
     file = io.StringIO(args.text) if args.text else sys.stdin
@@ -140,5 +140,9 @@ if __name__ == '__main__':
         sys.stdout.write("".join(get_or_passthru(c, conversion_map) for c in line))
     if sys.stdout.isatty():
         sys.stdout.write("\n")
+
+
+if __name__ == '__main__':
+    main()
 
 

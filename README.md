@@ -12,7 +12,7 @@ $ echo "foo" | fw
 
 Pass text in as an argument:
 ```bash
-$ fw --text "bar"
+$ fw --text "bar multiple words"
 ```
 ```
 ｂａｒ
