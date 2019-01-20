@@ -1,11 +1,18 @@
+"""
+thicc - Convert characters to their fullwidth representation
+"""
+__version__ = "0.0.1"
+__author__ = "Tim Martin"
+__licence__ = "MIT"
+
 import argparse
 import sys
 import io
 
-narrow = {
+_widen = {
     " ": "　",
     "!": "！",
-    "\"": "＂",
+    '"': "＂",
     "#": "＃",
     "$": "＄",
     "%": "％",
@@ -109,40 +116,47 @@ narrow = {
     "₩": "￦",
 }
 
-wide = {value: key for key, value in narrow.items()}
+_narrow = {value: key for key, value in _widen.items()}
 
 
-def get_or_passthru(key, map):
-    try:
-        return map[key]
-    except KeyError:
-        return key
+class TextToFile(argparse.Action):
+    def __call__(self, parser, namespace: argparse.Namespace, values, option_string=None):
+        setattr(namespace, self.dest, io.StringIO(values))
 
 
-parser = argparse.ArgumentParser(
-    description="Convert characters to their fullwidth representation if one exists.",
-)
-parser.add_argument(
-    '-r', '--reverse',
-    action='store_true',
-    help="Instead, convert characters to their regular representation",
-)
-parser.add_argument(
-    '-t', '--text',
-    help="The text to convert",
-)
+def get_args(args=None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Convert characters to their fullwidth representation if one exists."
+    )
+    parser.add_argument(
+        "-r",
+        "--reverse",
+        action="store_true",
+        help="Instead, convert characters to their regular representation",
+    )
+    parser.add_argument('--version', action='version', version=f'%(prog)s {__version__}')
+    if sys.stdin.isatty():
+        # if its an interactive session, e.g. no piped in stuff
+        parser.add_argument("text", action=TextToFile, help="The text to convert")
+    args = parser.parse_args(args)
+    if not sys.stdin.isatty():
+        args.text = sys.stdin
+    return args
+
+
+def map_string(s, reverse=False):
+    conversion_map = _narrow if reverse else _widen
+    return "".join(conversion_map.get(c, c) for c in s)
+
 
 def main():
-    args = parser.parse_args()
-    conversion_map = wide if args.reverse else narrow
-    file = io.StringIO(args.text) if args.text else sys.stdin
+    args = get_args()
+    file = args.text if args.text else sys.stdin
     for line in file:
-        sys.stdout.write("".join(get_or_passthru(c, conversion_map) for c in line))
+        sys.stdout.write(map_string(line, reverse=args.reverse))
     if sys.stdout.isatty():
         sys.stdout.write("\n")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-
-

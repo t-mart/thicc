@@ -1,10 +1,12 @@
-# fullwidth
+# thicc
+
+Convert characters to their fullwidth representation
 
 ## Usage Examples
 
 Pipe in text:
 ```bash
-$ echo "foo" | fw
+$ echo "foo" | thc
 ```
 ```
 ｆｏｏ
@@ -12,7 +14,7 @@ $ echo "foo" | fw
 
 Pass text in as an argument:
 ```bash
-$ fw --text "bar multiple words"
+$ thc --text "bar multiple words"
 ```
 ```
 ｂａｒ
@@ -20,7 +22,7 @@ $ fw --text "bar multiple words"
 
 Reverse fullwidth text:
 ```bash
-$ fw -r -t "ｂａｚ"
+$ thc -r -t "ｂａｚ"
 ```
 ```
 baz
@@ -28,5 +30,5 @@ baz
 
 ## Installation
 ```bash
-pip install --upgrade "git+https://github.com/t-mart/fw"
+pip install --upgrade "git+https://github.com/t-mart/thicc"
 ```
