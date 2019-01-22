@@ -40,6 +40,7 @@ setup(
     author_email="tim@timmart.in",
     description=thicc.__doc__.strip(),
     long_description=long_description(),
+    long_description_content_type="text/markdown",
     entry_points={"console_scripts": ["thc = thicc:main"]},
     cmdclass={"test": PyTest},
     tests_require=["pytest"],
