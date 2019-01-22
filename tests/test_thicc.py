@@ -1,4 +1,4 @@
-import thicc
+from thicc import thicc
 
 wide_string = "Ｔｈｅ　ｑｕｉｃｋ　ｂｒｏｗｎ　ｆｏｘ　ｊｕｍｐｓ　ｏｖｅｒ　ｔｈｅ　ｌａｚｙ　ｄｏｇ．"
 narrow_string = "The quick brown fox jumps over the lazy dog."

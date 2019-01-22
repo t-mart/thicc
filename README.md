@@ -43,3 +43,9 @@ Installation
 ```bash
 $ pip install --upgrade thicc
 ```
+
+Releasing
+=========
+
+1. Bump the version in `thicc/__init__.py`
+2. `make release`

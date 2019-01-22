@@ -8,6 +8,7 @@ black = "*"
 pytest = "*"
 
 [packages]
+twine = "*"
 
 [requires]
 python_version = "3.7"
