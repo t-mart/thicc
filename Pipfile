@@ -6,9 +6,10 @@ verify_ssl = true
 [dev-packages]
 black = "*"
 pytest = "*"
+pytest-cov = "*"
+twine = "*"
 
 [packages]
-twine = "*"
 
 [requires]
 python_version = "3.7"

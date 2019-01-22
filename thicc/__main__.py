@@ -15,14 +15,16 @@ def get_args(args=None) -> argparse.Namespace:
         action="store_true",
         help="Instead, convert characters to their regular representation.",
     )
-    parser.add_argument('-v', '--version', action='version', version=f'%(prog)s {__version__}')
     parser.add_argument(
-        'file',
-        nargs='?',
-        type=argparse.FileType(mode='rb', encoding='utf8'),
+        "-v", "--version", action="version", version=f"%(prog)s {__version__}"
+    )
+    parser.add_argument(
+        "file",
+        nargs="?",
+        type=argparse.FileType(mode="rb", encoding="utf8"),
         default=sys.stdin,
-        metavar='filename',
-        help="The file to convert. If omitted, standard input is read instead."
+        metavar="filename",
+        help="The file to convert. If omitted, standard input is read instead.",
     )
     args = parser.parse_args(args)
     return args
