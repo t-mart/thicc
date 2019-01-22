@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import codecs
 import sys
 
@@ -32,7 +32,7 @@ def long_description():
 setup(
     name="thicc",
     version=thicc.__version__,
-    packages=[""],
+    packages=find_packages(),
     url="https://github.com/t-mart/thicc",
     download_url="https://github.com/t-mart/thicc",
     license=thicc.__licence__,
