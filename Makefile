@@ -11,13 +11,13 @@ init:
 
 clean:
 	@echo $(TAG)Cleaning up$(END)
-	rm -rf .tox *.egg dist build .coverage .cache .pytest_cache httpie.egg-info
+	rm -rf .tox *.egg dist build .coverage .cache .pytest_cache thicc.egg-info
 	find . -name '__pycache__' -delete -print -o -name '*.pyc' -delete -print
 	@echo
 
 test: init
 	@echo $(TAG)Running tests$(END)
-	pipenv run py.test --cov ./httpie --cov ./tests --doctest-modules --verbose ./thicc ./tests
+	pipenv run py.test --cov ./thicc --cov ./tests --doctest-modules --verbose ./thicc ./tests
 	@echo
 
 release-test-pypi: clean test

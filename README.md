@@ -48,4 +48,5 @@ Releasing
 =========
 
 1. Bump the version in `thicc/__init__.py`
-2. `make release`
+2. Git commit it
+3. `make release`
