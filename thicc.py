@@ -7,7 +7,6 @@ __licence__ = "MIT"
 
 import argparse
 import sys
-import io
 
 _widen = {
     " ": "　",
@@ -119,11 +118,6 @@ _widen = {
 _narrow = {value: key for key, value in _widen.items()}
 
 
-class TextToFile(argparse.Action):
-    def __call__(self, parser, namespace: argparse.Namespace, values, option_string=None):
-        setattr(namespace, self.dest, io.StringIO(values))
-
-
 def get_args(args=None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Convert characters to their fullwidth representation if one exists."
@@ -132,15 +126,18 @@ def get_args(args=None) -> argparse.Namespace:
         "-r",
         "--reverse",
         action="store_true",
-        help="Instead, convert characters to their regular representation",
+        help="Instead, convert characters to their regular representation.",
     )
-    parser.add_argument('--version', action='version', version=f'%(prog)s {__version__}')
-    if sys.stdin.isatty():
-        # if its an interactive session, e.g. no piped in stuff
-        parser.add_argument("text", action=TextToFile, help="The text to convert")
+    parser.add_argument('-v', '--version', action='version', version=f'%(prog)s {__version__}')
+    parser.add_argument(
+        'file',
+        nargs='?',
+        type=argparse.FileType(mode='rb', encoding='utf8'),
+        default=sys.stdin,
+        metavar='filename',
+        help="The file to convert. If omitted, standard input is read instead."
+    )
     args = parser.parse_args(args)
-    if not sys.stdin.isatty():
-        args.text = sys.stdin
     return args
 
 
@@ -151,8 +148,7 @@ def map_string(s, reverse=False):
 
 def main():
     args = get_args()
-    file = args.text if args.text else sys.stdin
-    for line in file:
+    for line in args.file:
         sys.stdout.write(map_string(line, reverse=args.reverse))
     if sys.stdout.isatty():
         sys.stdout.write("\n")

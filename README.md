@@ -14,7 +14,7 @@ $ echo "foo" | thc
 
 Pass text in as an argument:
 ```bash
-$ thc --text "bar multiple words"
+$ thc <(echo bar)
 ```
 ```
 ｂａｒ
@@ -22,7 +22,7 @@ $ thc --text "bar multiple words"
 
 Reverse fullwidth text:
 ```bash
-$ thc -r -t "ｂａｚ"
+$ thc -r <(echo "ｂａｚ")
 ```
 ```
 baz
