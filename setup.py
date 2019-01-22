@@ -41,7 +41,7 @@ setup(
     description=thicc.__doc__.strip(),
     long_description=long_description(),
     long_description_content_type="text/markdown",
-    entry_points={"console_scripts": ["thc = thicc:main"]},
+    entry_points={"console_scripts": ["thc = thicc.__main__:main"]},
     cmdclass={"test": PyTest},
     tests_require=["pytest"],
 )
